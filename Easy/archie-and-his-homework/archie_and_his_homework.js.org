@@ -1,0 +1,91 @@
+/*
+Problem statement:
+Archie was given a homework by his teacher. He is given a fraction and he needs to write it in its reduced form. Archie is not good at Maths. Help Archie finish his homework.
+
+Input:
+2 integers separated by space denoting the numerator and denominator respectively.
+
+Output:
+Print the reduced form of the fraction
+
+Constraint:
+1 ≤ N ≤ D ≤ 1000
+
+Sample Input:
+20 40
+
+Sample Output:
+1 2
+*/
+
+//Read the test case file
+const readline = require('readline');
+const fs = require('fs');
+
+const rl = readline.createInterface({
+    input: fs.createReadStream('archie-and-his-homework/test.txt'),
+    output: process.stdout,
+    terminal: false
+});
+
+process.stdin.setEncoding('ascii');
+
+var input_stdin = "";
+var input_stdin_array = "";
+var input_currentline = 0;
+
+rl.on('line', function(data) {
+    console.log(data);
+    input_stdin += data + "\n";
+});
+
+rl.on('close', function() {
+    input_stdin_array = input_stdin.split("\n");
+    input_stdin_array.pop();
+    main();
+    process.exit(0);
+});
+
+function readLine() {
+    return input_stdin_array[input_currentline++];
+}
+
+function main() {
+    var input = readLine().split(" ");
+    var numer = parseInt(input[0]);
+    var denom = parseInt(input[1]);
+
+    var numerFactors = getFactors(numer).reverse();
+    var denomFactors = getFactors(denom).reverse();
+
+    var gcf = getGCF(numerFactors, denomFactors);
+
+    numer = numer / gcf;
+    denom = denom / gcf;
+
+    console.log(numer + " " + denom);
+}
+
+function getFactors(x) {
+    var result = [];
+
+    for (let i = 1; i <= x; i++) {
+        if ((x % i) == 0) {
+            result.push(i);
+        }
+    }
+
+    return result;
+}
+
+function getGCF(arr1, arr2) {
+    var result = 1;
+
+    for (let i = 0; i < arr2.length; i++) {
+        if (arr1.includes(arr2[i])) {
+            result = arr2[i];
+            break;
+        }
+    }
+    return result;
+}

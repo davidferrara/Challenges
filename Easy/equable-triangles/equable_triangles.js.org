@@ -1,0 +1,76 @@
+/*
+Problem statement:
+An Equable Triangle is a triangle which has its area equals to the sum of its sides. 
+You are given with the sides of a triangle, your task is to write a code which will return 'True'. if the triangle is equable, otherwise 'False' without quotes.
+
+Input:
+First line of input will contain 'n' that is the number of test cases.
+Next n lines of the input will contain the length of the sides of triangle separated by a space each.
+
+Output:
+The output will return 'True' if the triangle is equable, and 'False' otherwise.
+
+Constraint:
+Number of test cases = n and 0 < n < 100.
+And the length of each side of triangle is 's', 0 < s < 10000.
+
+Sample Input:
+1
+6 8 10
+
+Sample Output:
+True
+*/
+
+//Read the test case file
+const readline = require('readline');
+const fs = require('fs');
+
+const rl = readline.createInterface({
+    input: fs.createReadStream('equable-triangles/test.txt'),
+    output: process.stdout,
+    terminal: false
+});
+
+process.stdin.setEncoding('ascii');
+
+var input_stdin = "";
+var input_stdin_array = "";
+var input_currentline = 0;
+
+rl.on('line', function(data) {
+    console.log(data);
+    input_stdin += data + "\n";
+});
+
+rl.on('close', function() {
+    input_stdin_array = input_stdin.split("\n");
+    input_stdin_array.pop();
+    main();
+    process.exit(0);
+});
+
+function readLine() {
+    return input_stdin_array[input_currentline++];
+}
+
+function main() {
+    var t = parseInt(readLine());
+
+    for (let i = 0; i < t; i++) {
+        var sides = readLine().split(" ");
+        var a = parseInt(sides[0]);
+        var b = parseInt(sides[1]);
+        var c = parseInt(sides[2]);
+        var perimeter = a + b + c;
+        var s = perimeter / 2;
+        var temp = (s * (s - a) * (s - b) * (s - c));
+        var area = Math.sqrt(temp);
+
+        if (perimeter == area) {
+            console.log("True");
+        } else {
+            console.log("False");
+        }
+    }
+}

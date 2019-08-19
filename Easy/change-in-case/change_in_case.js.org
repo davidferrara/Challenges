@@ -1,0 +1,103 @@
+/*
+Problem statement:
+You will be given a single string and two positive integers denoting indices. You need to change the case of the characters at those indices,i.e change uppercase to lowercase and lowercase to uppercase. It is guaranteed that all characters in the string are alphabets.
+
+Input:
+The first line contains N, the length of string.
+The next line contains a single string.
+Two integers, x and y, in next line separated by space.
+
+Output:
+Print the string after altering the case of characters at those indices
+
+Constraint:
+1 ≤ string.length ≤ 40
+0 ≤ x,y ≤ string.length
+
+Sample Input:
+6
+Dcoder
+0 3
+
+Sample Output:
+dcoDer
+*/
+
+//Read the test case file
+const readline = require('readline');
+const fs = require('fs');
+
+const rl = readline.createInterface({
+    input: fs.createReadStream('change-in-case/test.txt'),
+    output: process.stdout,
+    terminal: false
+});
+
+process.stdin.setEncoding('ascii');
+
+var input_stdin = "";
+var input_stdin_array = "";
+var input_currentline = 0;
+
+rl.on('line', function(data) {
+    console.log(data);
+    input_stdin += data + "\n";
+});
+
+rl.on('close', function() {
+    input_stdin_array = input_stdin.split("\n");
+    input_stdin_array.pop();
+    main();
+    process.exit(0);
+});
+
+function readLine() {
+    return input_stdin_array[input_currentline++];
+}
+
+function main() {
+    var n = parseInt(readLine()); //string length
+    var str = readLine(); //the string
+    var strArr = str.split("");
+    var indices = readLine(); //the indices
+    var indicesArr = indices.split(" ");
+    var intArr = [];
+    var answer = "";
+
+    for (let i = 0; i < indicesArr.length; i++) {
+        intArr.push(parseInt(indicesArr[i]));
+    }
+
+    for (let i = 0; i < n; i++) {
+        if (i == intArr[0]) {
+            if (isUpper(str.charAt(intArr[0]))) {
+                strArr[i] = str.charAt(intArr[0]).toLowerCase();
+            } else {
+                strArr[i] = str.charAt(intArr[0]).toUpperCase();
+            }
+        }
+        if (i == intArr[1]) {
+            if (isUpper(str.charAt(intArr[1]))) {
+                strArr[i] = str.charAt(intArr[1]).toLowerCase();
+            } else {
+                strArr[i] = str.charAt(intArr[1]).toUpperCase();
+            }
+        }
+    }
+
+    for (let i = 0; i < strArr.length; i++) {
+        answer = answer.concat(strArr[i]);
+    }
+
+    console.log(answer);
+}
+
+function isUpper(letter) {
+    var result = false;
+
+    if ((letter.charCodeAt(0) > 065) &&
+        (letter.charCodeAt(0) < 090)) {
+        result = true;
+    }
+    return result;
+}

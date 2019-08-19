@@ -1,0 +1,47 @@
+//Read the test case file
+const readline = require('readline');
+const fs = require('fs');
+
+const rl = readline.createInterface({
+    input: fs.createReadStream('equable-triangles/test.txt'),
+    output: process.stdout,
+    terminal: false
+});
+
+process.stdin.setEncoding('ascii');
+
+var input_stdin = "";
+var input_stdin_array = "";
+var input_currentline = 0;
+
+rl.on('line', function(data) {
+    console.log(data);
+    input_stdin += data + "\n";
+});
+
+rl.on('close', function() {
+    input_stdin_array = input_stdin.split("\n");
+    input_stdin_array.pop();
+    main();
+    process.exit(0);
+});
+
+function readLine() {
+    return input_stdin_array[input_currentline++];
+}
+
+function main() {
+  var n = parseInt(readLine());
+  var str = readLine();
+  var charCode = null;
+  var answer = "";
+  
+  for(let i = 0; i < str.length; i++) {
+  	charCode = str.charAt(i).charCodeAt(0);
+  	if((charCode >= 48)&&(charCode <= 57)) {
+  		answer = answer.concat(str.charAt(i), " ");
+  	}
+  }
+  
+  console.log(answer);
+}

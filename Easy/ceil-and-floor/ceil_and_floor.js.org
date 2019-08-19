@@ -1,0 +1,58 @@
+/*
+Problem statement:
+In mathematics and computer science, the floor and ceiling functions map a real number to the largest previous and the smallest following integer, respectively. consider a number x.
+ceil(x) : Returns the smallest integer that is greater than or equal to x.
+floor(x) : Returns the largest integer that is smaller than or equal to x.Given a number print ceil and floor of that number.
+
+Input:
+Each input consist of 1 real Number.
+
+Output:
+Print two integer denoting ceil and floor of the given number respectively.
+
+Constraint:
+1<=X<=100
+
+Sample Input:
+5.67
+
+Sample Output:
+6 5
+*/
+
+//Read the test case file
+const readline = require('readline');
+const fs = require('fs');
+
+const rl = readline.createInterface({
+    input: fs.createReadStream('ceil-and-floor/test.txt'),
+    output: process.stdout,
+    terminal: false
+});
+
+process.stdin.setEncoding('ascii');
+
+var input_stdin = "";
+var input_stdin_array = "";
+var input_currentline = 0;
+
+rl.on('line', function(data) {
+    console.log(data);
+    input_stdin += data + "\n";
+});
+
+rl.on('close', function() {
+    input_stdin_array = input_stdin.split("\n");
+    input_stdin_array.pop();
+    main();
+    process.exit(0);
+});
+
+function readLine() {
+    return input_stdin_array[input_currentline++];
+}
+
+function main() {
+    var x = readLine();
+    console.log((Math.ceil(x).toString()) + " " + (Math.floor(x).toString()));
+}
