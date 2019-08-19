@@ -20,8 +20,8 @@ Sample Output:
 1,2,4,8,16,32
 */
 
-function main() {
-    var n = parseInt(readLine());
+function main(n) {
+    var result = "";
     var answer = [];
 
     if (n >= 0) {
@@ -35,5 +35,5 @@ function main() {
             answer.push(Math.pow(2, i));
         }
     }
-    console.log(answer.toString());
+    return result = answer.toString();
 }
